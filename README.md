@@ -25,7 +25,7 @@ Data Complete: A Game or Set is labeled as Data Complete when we have included a
 Image Complete: A Game or Set is labeled as Image Complete when we have created, or been donated high quality images covering all relevant attributes of each item in the game or set.
 
 # Style Guide
-Our goal is to accurately document TCGs as they were designed and released. Whereever possible, the style and errors present in a release item should be preserved.  If their is a need to include corrections or errata, they should be included in additional to the original, published form. 
+Our goal is to accurately document TCGs as they were designed and released. Whereever possible, the style and errors present in a release item should be preserved.  If their is a need to include corrections or errata, they should be included in addition to the original, published form. 
 
 # Data
 All items in the dataset shall have at least the following values
@@ -43,7 +43,6 @@ Currently, we intend to maintain per-game CSVs with all item data. These CSVs wi
 
 Our desire is to provide a robust set of data formats to support other projects.  If you have a project that would benefit from different data formats, please reach out or create an issue. 
 
-
 # Current Game Statuses
 ## Rage - Item Complete - Images: 1099/1294 (85%)
 - Limited Edition - Data Complete - Images: 307/321 (96%)
@@ -52,10 +51,12 @@ Our desire is to provide a robust set of data formats to support other projects.
 - The Wyrm - Data Complete - Images: 143/185 (77%)
 - The War of the Amazon - Item Complete - Images: 75/140 (54%)
 - Legacy of the Tribes - Item Complete - Images: 159/215 (74%)
+
 https://archive.org/details/rage-ccg_hd-scans
 
 ## The Crow - Data Complete: 123/123 - Images: 26/123 (21%)
 - Limited Edition - Data Complete 122/122 - Images: 26/122 (21%)
 - Promo - Data Complete 1/1 - Images: 0/1 (0%)
+
 https://archive.org/details/the-crow_card-scans
 
