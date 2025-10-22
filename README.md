@@ -31,9 +31,23 @@ Our goal is to accurately document TCGs as they were designed and released. Wher
 All items in the dataset shall have at least the following values
 
 - tcgdata_item_id - a unique id across all items from all games
-- name - a string naming the item.  This item should represent a functionally unique game item.  Different items in the same game line with the exact same game function may share the same name value, but should have disambigution attributes in the attributes value. 
 - game - a string identifying the game this object is from.  All values in this field should be unique to the game they represent.
-- set - a string identifying a set of cards this object is from.  This value may be null.
+- set - a string identifying a set of cards this object is from.  This value may be null in games that have a single, unnamed, release.
+- name - the name of an item is tracked in three values
+  - name_printed - a string recording the actual name printed on the item, whether or not is is the name the game itself uses to refer to the card
+  - functional_name - a string naming the item.  This value should represent a functionally unique game item. Items that are re-released, or are released in multiple variants with that are fully indistinguishable by the game rules will share this value. Items in the same game that share the same name_printed value, but are disntiguishable by the game rules must have different values here. The default value for this field is the concatenation of name_printed and the functional_disambiguator attribute. 
+    - functional_disambiguator - this is a string that distinguishes functionally different items with the same printed name. Criteria for choosing this value are (in order):
+        - The value should be clear enough so that a person in posession of the item can identify the item knowing only the game line, set, printed name and this value. Descriptions of the unique function of the item are ideal.
+            - For example, Rage has four functionally different cards that share a printed name of "Gauntlet Flux". These cards differ in their text by how much they effect a "Gauntlet" property of other cards. We are using the modification value as the functional_disambiguator ("-2", "-1", "+1", "+2"). A user possessing only one of these four cards would still be able to identify it based on the disambiguator value.
+        - If there is an existing disambiguator in common use among the game's community already, we should adopt it, as long as it meets the above requirements
+        - Shorter values are preferred over longer values when the above requirements are met as this value will be used in the creation of other values
+  - item_name - a string uniquely identifying the item, taking into account any necessary functional disambiguation along with any non-functional variance. All items within a game and set must have a different value here. The default value for this field is the concatenation of functional_name value and the variant_disambiguator attribute. 
+    - variant_disambiguator: this is a string that distinguishes physically distinct items from the same game and set with the same printed name. Both intentional (premium printings, etc.) and unintentional (misprints, etc.) variances are covered by this value. Criteria for choosing this value are (in order):
+        - The value should be clear enough so that a person in posession of the item can identify the item knowing only the game line, set, printed name, functional disambiguator, and this value. Variants must have some difference in the physical aspects of the item, so the variant disambiguator should always reference a physical property of the card.
+        - Unfortunately, there are some situations where the variance can only be detected by comparing two variants of the same item to each other. In these cases, it is acceptable to use a relative descriptor as the disambiguation value, but objective properties are preferred. For example, if the variance is due to a background color, naming the hue is preferred (blue, green, etc). If this is not possible, "lighter" vs "darker" may be used
+        - If they only variances for the item are already captured in other attributes, e.g. "language" or "finish", use the minimum combination of these attributes necessary to identify the variances.
+        - If there is an existing disambiguator in common use among the game's community already, we should adopt it, as long as it meets the above requirements
+        - Shorter values are preferred over longer values when the above requirements are met as this value will be used in the creation of other values
 - source - a string indicating the source of the data for this item.   Acceptable values are ("item", "photo", "first-party-document", "third-party-document")
 - images - a JSON list of filenames without extensions that can be used to uniquely identify images for the item.
 - attributes - a JSON object describing all relevant attributes of the game item.
@@ -44,13 +58,13 @@ Currently, we intend to maintain per-game CSVs with all item data. These CSVs wi
 Our desire is to provide a robust set of data formats to support other projects.  If you have a project that would benefit from different data formats, please reach out or create an issue. 
 
 # Current Game Statuses
-## Rage - Item Complete - Images: 1099/1294 (85%)
+## Rage - Data Complete - Images: 1099/1294 (85%)
 - Limited Edition - Data Complete - Images: 307/321 (96%)
 - Unlimited Edition - Data Complete - Images: 319/321 (99%)
 - The Umbra - Data Complete - Image Complete: 95/95 (100%)
 - The Wyrm - Data Complete - Images: 143/185 (77%)
-- The War of the Amazon - Item Complete - Images: 75/140 (54%)
-- Legacy of the Tribes - Item Complete - Images: 159/215 (74%)
+- The War of the Amazon - Data Complete - Images: 75/140 (54%)
+- Legacy of the Tribes - Data Complete - Images: 159/215 (74%)
 
 https://archive.org/details/rage-ccg_hd-scans
 
@@ -60,3 +74,11 @@ https://archive.org/details/rage-ccg_hd-scans
 
 https://archive.org/details/the-crow_card-scans
 
+## On the Edge - 
+- Limited Edition - 269/269 Variants unknown
+- Unlimited Edition - 269/269 Variants unknown
+- Standard Edition - Item Complete: 283/283
+- The Cut-Ups Project - Item Complete: 133/133
+- Shadows - Item Complete: 121/121
+- Arcana - Item Complete: 169/169
+- Specials - Item Complete: 24/24
